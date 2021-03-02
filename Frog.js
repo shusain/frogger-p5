@@ -47,7 +47,7 @@ export class Frog {
             this.z = 1;
         }
         if(this.isDriftingWithLog) {
-            this.x += 1;
+            this.x += this.isDriftingWithLog.itemSpeed;
             this.targetX = this.x;
         }
         image(BufferedGraphics.bufferedGraphicsMap.frog, this.x - GameMap.tileSize*.5*this.z, this.y - GameMap.tileSize*.5*this.z, GameMap.tileSize*this.z, GameMap.tileSize*this.z)

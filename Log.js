@@ -19,7 +19,6 @@ export class Log {
         const isWithinXBounds = thisActualX < frogActualX && thisActualX+Log.width > frogActualX
         const isWithinYBounds = thisActualY < frogActualY && thisActualY+Log.height > frogActualY
         
-        console.log(isWithinXBounds, isWithinYBounds);
         return isWithinXBounds && isWithinYBounds
     }
     draw() {

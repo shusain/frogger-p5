@@ -14,13 +14,13 @@ export class FroggerMain {
     static frog;
     static map;
     static bufferedGraphics;
-    static logManager = new SlidingRowCollection(3, DriftingRow, Log, GameMap.tileSize+10, GameMap.tileSize);
-    static carManager = new SlidingRowCollection(3, DriftingRow, Car, GameMap.tileSize*4+10, GameMap.tileSize);
+    static logManager = new SlidingRowCollection(3, DriftingRow, Log, GameMap.tileSize+10, GameMap.tileSize, 300, GameMap.tileSize*2, Math.random()*1);
+    static carManager = new SlidingRowCollection(3, DriftingRow, Car, GameMap.tileSize*4+10, GameMap.tileSize, 300, GameMap.tileSize*5, 1+Math.random()*3);
 
     constructor() {
         
         window.setup = () => {
-            frameRate(30)
+            frameRate(60)
             createCanvas(GameMap.columnCount*GameMap.tileSize, GameMap.rowCount*GameMap.tileSize);
             FroggerMain.bufferedGraphics = new BufferedGraphics()
         
@@ -58,8 +58,8 @@ export class FroggerMain {
                 if(mapLocation.tileType === 'water') {
                     // Check if frog is on log if not frog is dead
                     const foundLog = FroggerMain.logManager.isItemIntersectingRow(FroggerMain.frog)
-                    if(foundLog) {
-                        FroggerMain.frog.isDriftingWithLog = true
+                    if(foundLog.length>0) {
+                        FroggerMain.frog.isDriftingWithLog = foundLog[0]
                     } else {
                         FroggerMain.frog.isDriftingWithLog = false
                         FroggerMain.lives--
@@ -72,7 +72,8 @@ export class FroggerMain {
                     FroggerMain.frog.isDriftingWithLog = false
                     // Check if frog is being hit by a car if so, frog is dead
                     const foundCar = FroggerMain.carManager.isItemIntersectingRow(FroggerMain.frog)
-                    if(foundCar) {
+                    debugger
+                    if(foundCar.length>0) {
                         FroggerMain.frog.isDriftingWithLog = false
                         FroggerMain.lives--
                         FroggerMain.frog.resetPosition()

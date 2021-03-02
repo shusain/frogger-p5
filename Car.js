@@ -18,7 +18,6 @@ export class Car {
         const isWithinXBounds = thisActualX < frogActualX && thisActualX+Car.width > frogActualX
         const isWithinYBounds = thisActualY < frogActualY && thisActualY+Car.height > frogActualY
         
-        console.log(isWithinXBounds, isWithinYBounds);
         return isWithinXBounds && isWithinYBounds
     }
     draw() {

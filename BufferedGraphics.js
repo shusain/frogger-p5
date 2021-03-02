@@ -24,9 +24,11 @@ export class BufferedGraphics {
     drawLog() {
         const pg = createGraphics(GameMap.tileSize, GameMap.tileSize)
         this.drawCommonRect(pg, 255, 100, 50)
-        pg.stroke(100, 100, 50)
+        pg.stroke(230, 100, 50)
         pg.strokeWeight(2)
-        pg.line(10, GameMap.tileSize/2, GameMap.tileSize-10, GameMap.tileSize/2)
+        pg.line(5, GameMap.tileSize/2-10, GameMap.tileSize-10, GameMap.tileSize/2-10)
+        pg.line(10, GameMap.tileSize/2, GameMap.tileSize-20, GameMap.tileSize/2)
+        pg.line(30, GameMap.tileSize/2+10, GameMap.tileSize-10, GameMap.tileSize/2+10)
         strokeWeight(0)
         BufferedGraphics.bufferedGraphicsMap.log = pg
     }

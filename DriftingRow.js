@@ -1,27 +1,30 @@
+import { GameMap } from "./GameMap.js";
+
 export class DriftingRow {
-    constructor(x, y, itemType) {
+    constructor(x, y, itemType, spaceBetweenItems, itemSpeed) {
         this.x = x
-        const logs = [];
-        const numberOfLogs = 1 + Math.floor(Math.random()*3)
-        const spaceBetweenLogs = 50
-        for(let i=0; i < numberOfLogs; i++) {
-            logs.push(new itemType(x+i*(itemType.width + spaceBetweenLogs), y, this))
+        this.itemSpeed = itemSpeed;
+        const items = [];
+        const numberOfItems = 1 + Math.floor(Math.random()*2)
+        this.spaceBetweenItems = spaceBetweenItems || 50
+        for(let i=0; i < numberOfItems; i++) {
+            items.push(new itemType(x+i*(itemType.width + this.spaceBetweenItems), y, this))
         }
-        this.logs = logs;
+        this.items = items;
     }
     isItemIntersectingRow(frog) {
-        return this.logs.some(log => log.isIntersectingItem(frog))
+        return this.items.filter(item => item.isIntersectingItem(frog))
     }
     isRowOffScreen() {
-        return this.x+this.logs[0].x > width
+        return this.x+this.items[0].x > width
     }
     drift() {
-        this.x += 1
+        this.x += this.itemSpeed
     }
     draw() {
         this.drift()
-        this.logs.forEach(log => {
-            log.draw()
+        this.items.forEach(item => {
+            item.draw()
         })
     }
 }
